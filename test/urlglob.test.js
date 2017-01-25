@@ -21,6 +21,21 @@ test('urlglob', function (t) {
   t.end()
 })
 
+test('test with more star', function(t) {
+  t.ok(urlglob('http://*/*', 'http://example.org/foo/bar.html'))
+  t.ok(urlglob('http://*/foo*', 'http://example.com/foo/bar.html'))
+  t.ok(urlglob('http://*/foo*', 'http://www.google.com/foo'))
+  t.ok(urlglob('https://*.google.com/foo*bar', 'https://www.google.com/foo/baz/bar'))
+  t.ok(urlglob('https://*.google.com/foo*bar', 'https://docs.google.com/foobar'))
+  t.ok(urlglob('http://127.0.0.1/*', 'http://127.0.0.1/'))
+  t.ok(urlglob('http://127.0.0.1/*', 'http://127.0.0.1/foo/bar.html'))
+
+  t.ok(urlglob('http://*/foo\\**', 'http://www.google.com/foo*'))
+  t.ok(urlglob('http://*/foo\\**\\*', 'http://www.google.com/foo*/bar*/'))
+  t.ok(urlglob('http://*/foo\\**\\**?.js', 'http://www.google.com/foo*/path/bar*index.js'))
+  t.end()
+})
+
 function str(thing) {
   return thing.toString()
 }

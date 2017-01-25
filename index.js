@@ -44,7 +44,7 @@ function convert(pattern) {
     .replace(/([()[{+.$^\\|?])/g, '\\$1')
 
     .replace(/\\[*]/g, safeGlob)
-    .replace(/\*/, catchAll)
+    .replace(/\*/g, catchAll)
     .replace(RegExp(safeGlob, 'g'), '*')
     .replace(RegExp(safeLimitedGlob, 'g'), '[^/]+')
     + '\\/?$'
